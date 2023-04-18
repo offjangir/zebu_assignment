@@ -1,8 +1,6 @@
 # Completing Zebu Intelligent Systems Assignment for Full Time Position 
 
-Follow the Instructions for Setting Up and running the code. Make sure you have the right version of Ubuntu i.e Ubuntu 20.04 with ROS Melodic.
-Remember only Mavros has been used in the python code using only rostopics and services of PX4 . No High level Serparate Library ahs been used such as dronekit, mavsdk python etc. 
-
+Follow the Instructions for Setting Up and running the code. Make sure you have the right version of Ubuntu i.e Ubuntu 20.04 with ROS Noetic.
 <!-- 
 <div  align="center">
 <img src="./spiral.gif" width="350" alt/> -->
@@ -21,7 +19,7 @@ Remember only Mavros has been used in the python code using only rostopics and s
 ## Setting Up the Simulator - PX4 with Gazebbo Classic 
 - Follow https://docs.px4.io/main/en/dev_setup/dev_env_linux_ubuntu.html#ros-gazebo-classic for Setting up simulation in ROS Melodic
 
-## After setting up PX4 with Gazebo classic 
+## After setting up PX4 with Gazebo classic Source paths in Bashrc
 
 * Open a new terminal and type:
 ```
@@ -36,7 +34,7 @@ export ROS_PACKAGE_PATH=ROS_PACKAGE_PATH:~/catkin_ws/src/PX4-Autopilot
 export ROS_PACKAGE_PATH=ROS_PACKAGE_PATH:~/catkin_ws/src/PX4-AutopilotTools/sitl_gazebo
 ```
 ## Install  Apriltag ROS for Pose Estimation and tag detection
-- Use https://github.com/AprilRobotics/apriltag_ros for cloning and instuction of using apriltag
+- Use https://github.com/AprilRobotics/apriltag_ros for cloning and instruction of using apriltag
 
 ## Changing Camera to downward facing Camera & setting up apriltag config
 - Replace the iris_fav_cam model in PX4-Autopilot/Tools/simulation/gazebo_classic/models with model in /models.
@@ -49,7 +47,7 @@ export ROS_PACKAGE_PATH=ROS_PACKAGE_PATH:~/catkin_ws/src/PX4-AutopilotTools/sitl
 roslaunch zebu_assignment mymav.launch
 ```
 
-- Run Question1_2.py : By default Question 2 shows functionalities of 1 and 2 So the Spral function is already on. Please Uncomment Sprial_trej() in case not requied. We can increse the pitch length of spiral after which it comes back home, folloing spiral trejectory till infity in single loop would be weird so I have added this fuctionality.
+- Run Question1_2.py : By default Question 2 shows functionalities of 1 and 2 So the Spral function is already on. Please Uncomment Sprial_trej() in case not requied. We can increase the pitch length of spiral after which it comes back home, following spiral trejectory till infinity in single loop would be weird so I have added this fuctionality of controlling for how long it follows spiral trej. 
 ```
 python3 Question1_2.py
 ```
