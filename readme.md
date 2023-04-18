@@ -3,19 +3,19 @@
 Follow the Instructions for Setting Up and running the code. Make sure you have the right version of Ubuntu i.e Ubuntu 20.04 with ROS Melodic.
 Remember only Mavros has been used in the python code using only rostopics and services of PX4 . No High level Serparate Library ahs been used such as dronekit, mavsdk python etc. 
 
-
+<!-- 
 <div  align="center">
-<img src="./spiral.gif" width="350" alt/>
+<img src="./spiral.gif" width="350" alt/> -->
 
-</div>
+<!-- </div>
 <p align="center">
 <em>Moving in Spiral</em>
-</p>
+</p> -->
 
-
+<!-- 
 <div  align="center">
 <img src="Figure_1.png" width="350" />
-</div>
+</div> -->
 
 
 ## Setting Up the Simulator - PX4 with Gazebbo Classic 
