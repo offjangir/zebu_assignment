@@ -9,6 +9,47 @@ from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeReq
 from apriltag_ros.msg import *
 from geometry_msgs.msg import TwistStamped
 
+
+#PD controller class for 
+class controller:
+    def __init__(self):
+        self.x_er_prev = 0
+        self.y_er_prev = 0
+        self.z_er_prev = 0
+        self.kp = 0.2
+        self.kd = 0.2
+        self.x_er = 0
+        self.y_er = 0
+        self.z_er = 0
+        self.dt = 0.1
+    
+    def pos(self,x,y,z):
+        self.x_er = x
+        self.y_er = y
+        self.z_er = z
+    
+    def ret_x(self):
+        return self.x_er
+    
+    def ret_y(self):
+        return self.y_er   
+    
+    def ret_z(self):
+        return self.z_er     
+    
+    def command(self,x,y,z):
+        self.x_er = x
+        self.y_er = y
+        self.z_er = z
+        x_vel = self.x_er*self.kp + (self.x_er-self.x_er_prev)/self.dt
+        y_vel = self.y_er*self.kp + (self.y_er-self.y_er_prev)/self.dt
+        z_vel = self.z_er*self.kp + (self.z_er-self.z_er_prev)/self.dt
+        self.x_er_prev = self.x_er
+        self.y_er_prev = self.y_er
+        self.z_er_prev = self.z_er
+        print(x_vel, y_vel,z_vel)
+        return [x_vel, y_vel,-z_vel]
+        
 # Defining a arming function for arming the drone
 def arm():
     print("Arming")
@@ -73,54 +114,13 @@ def pose_callback(msg):
     command.twist.angular.y = 0
     command.twist.angular.z = 0
     
-    #Landing if very close to the groud and tag
-    # if PD.ret_z() < 0.1 :
-    #     print("Landing & Dis-Arming")
-    #     result =  arming_client(value=False)
-    # else:
-    #     pass
+    Landing if very close to the groud and tag
+    if PD.ret_z() < 0.1 :
+        land()
+    else:
+        pass
     
     pub.publish(command)
-
-#PD controller class for 
-class controller:
-    def __init__(self):
-        self.x_er_prev = 0
-        self.y_er_prev = 0
-        self.z_er_prev = 0
-        self.kp = 0.2
-        self.kd = 0.2
-        self.x_er = 0
-        self.y_er = 0
-        self.z_er = 0
-        self.dt = 0.1
-    
-    def pos(self,x,y,z):
-        self.x_er = x
-        self.y_er = y
-        self.z_er = z
-    
-    def ret_x(self):
-        return self.x_er
-    
-    def ret_y(self):
-        return self.y_er   
-    
-    def ret_z(self):
-        return self.z_er     
-    
-    def command(self,x,y,z):
-        self.x_er = x
-        self.y_er = y
-        self.z_er = z
-        x_vel = self.x_er*self.kp + (self.x_er-self.x_er_prev)/self.dt
-        y_vel = self.y_er*self.kp + (self.y_er-self.y_er_prev)/self.dt
-        z_vel = self.z_er*self.kp + (self.z_er-self.z_er_prev)/self.dt
-        self.x_er_prev = self.x_er
-        self.y_er_prev = self.y_er
-        self.z_er_prev = self.z_er
-        print(x_vel, y_vel,z_vel)
-        return [x_vel, y_vel,-z_vel]
 
 if __name__ == "__main__":
     rospy.init_node("offb_node_py")
