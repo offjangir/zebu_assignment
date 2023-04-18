@@ -36,10 +36,15 @@ export ROS_PACKAGE_PATH=ROS_PACKAGE_PATH:~/catkin_ws/src/PX4-AutopilotTools/sitl
 ## Install  Apriltag ROS for Pose Estimation and tag detection
 - Use https://github.com/AprilRobotics/apriltag_ros for cloning and instruction of using apriltag
 
-## Changing Camera to downward facing Camera & setting up apriltag config
+## Some Other Changes which are required
 - Replace the iris_fav_cam model in PX4-Autopilot/Tools/simulation/gazebo_classic/models with model in /models.
 - Replace the config in apriltag_ros with configs in /configs
 - Please redirect approprite camera feed topic as per your convinience in Apriltag_ros launch files.(Topic : /iris/usb_cam, Launch File: continuous_detection.launch)
+- Build workspace
+
+``` 
+catkin build
+```
 
 ## Finally build the workspace
 - launch mymav.launch 
